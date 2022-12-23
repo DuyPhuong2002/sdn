@@ -1,0 +1,186 @@
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/_layout}">
+
+    <head>
+        <title>Chỉnh sửa chấm công</title>
+
+        <style>
+
+            .title-card {
+                padding-top: 11%;
+                padding-bottom: 11%;
+                margin-left: 4%;
+                font-weight: bold
+            }
+
+            .title-page {
+                text-align: center;
+                margin-top: 2%;
+                margin-bottom: 3%;
+                font-weight: bold
+            }
+
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div layout:fragment="content">
+
+            <h3 class="title-page">Chỉnh sửa tiền lương</h3>
+
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col background-table">
+
+                    <form th:action="@{'/salary/edit/' + ${object.getId()}}"  method="post" name="_form">  
+
+                        <div class="row" style="margin-top: 3%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                Email
+                            </div>
+                        </div>
+
+
+                        <div class="row" style="margin-top: 1%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                <input type="text" class="form-control input"  id="" name="" th:value="${object.getMail().getMail()}" readonly="">
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+
+                        <div class="row" style="margin-top: 3%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col">Họ tên</div>
+                        </div>
+
+                        <div class="row" style="margin-top: 1%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                <input type="text" class="form-control input" id="" name="" th:value="${object.getMail().getFullname()}" readonly="">
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+
+                        <div class="row" style="margin-top: 3%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-5">
+                                Tháng
+                            </div>
+                            <div class="col-sm-5">
+                                Tổng thời gian làm
+                            </div>
+                        </div>
+
+
+                        <div class="row" style="margin-top: 1%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control input" placeholder="Tháng" oninput="validateDateStart();" id="dateStart"
+                                       name="date" th:value="${#dates.format(object.getDate(), 'dd-MM-yyyy')}">
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="col input-group mb-3">
+                                    <input type="text" class="form-control input" placeholder="Thời gian làm việc" id="time" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required=""
+                                       name="time" th:value="${object.getTotalTime()}" >
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">Giờ</span>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+
+                        <div class="row" style="margin-top: 3%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-10">
+                                Lương
+                            </div>
+               
+                        </div>
+
+                        <div class="row" style="margin-top: 1%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-10">
+                                <div class="col input-group mb-3">
+                                <input type="text" class="form-control input" placeholder="Lương" id="salary" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                                       name="salary" th:value="${object.getSalary()}" required="">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">VNĐ</span>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+
+                        <div class="row" style="margin-top: 4%;">
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-3" style="text-align: center ;">
+
+                                        <input type="submit" id="btnSubmit" class="btn btn-success form-control button-defualt" name="action"
+                                               value="Lưu">
+                                    </div>
+                                    <div class="col-sm-3" style="text-align: center ;">
+                                        <input type="submit" class="btn btn-success form-control button-defualt" name="action"
+                                               value="Trở lại">
+                                    </div>
+                                    <div class="col-sm-2"></div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+                <div class="col-sm-3"></div>
+
+            </div>
+
+
+        </div>
+
+
+    </body>
+
+</html>
+
+<script th:src="@{/script/cleave.js}"></script>
+<script>
+
+    var dateStartFormat = new Cleave('#dateStart', {
+        date: true,
+        delimiter: '-',
+        datePattern: ['d', 'm', 'Y']
+    });
+
+
+    var btnSubmit = document.getElementById('btnSubmit');
+
+    function validateDateStart() {
+        var val = document.getElementById('dateStart').value;
+        if (val.length < 10) {
+            document.getElementById('dateStart').style.borderColor = '#cc0000';
+            btnSubmit.disabled = true;
+            btnSubmit.style.cursor = "pointer";
+            btnSubmit.style.background = '#cc0000';
+        } else {
+            document.getElementById('dateStart').style.borderColor = 'green';
+            btnSubmit.disabled = false;
+            btnSubmit.style.background = '#6667AB';
+        }
+    }
+    
+
+</script>

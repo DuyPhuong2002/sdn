@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+
+<head>
+
+</head>
+
+<body>
+
+
+<aside class=" main-sidebar elevation-4 " th:fragment="sidebar">
+    <!-- Brand Logo -->
+    <a th:href="@{/home/index}" class="brand-link ">
+        <img src="/images/Website/panel.png" alt="Product Demo" style="max-width:120px ">
+
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar ">
+        <!-- Sidebar user panel (optional) -->
+
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2 ">
+            <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview " role="menu "
+                data-accordion="false ">
+                <!-- Add icons to the links using the .nav-icon class
+       with font-awesome or any other icon font library -->
+                <li class="nav-item sd ">
+                    <a th:href="@{/home/index}" class="nav-link " id="a-1">
+                        <div class="nav-item-color " id="div-1" >
+                            <!-- <i class="nav-icon " style="color:white "></i> -->
+                            <!-- <img src="images/icon/adminhome.svg " width="20px " srcset=" "> -->
+                            <i class="fas fa-home "></i>
+                            <p style="margin-left: 8% ">
+                                Home
+
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+                <li class="nav-item sd ">
+                    <a href="/account/index" id="a-2" class="nav-link ">
+                        <div class="nav-item-color " id="div-2">
+                            <i class="fas fa-user "></i>
+
+                            <p style="margin-left: 8% ">
+                                Account
+
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+                <li class="nav-item sd ">
+                    <a href="/posts/index" class="nav-link " id="a-3" >
+                        <div class="nav-item-color " id="div-3">
+                            <i class="fas fa-pager "></i>
+
+                            <p style="margin-left: 8% ">
+                                Posts
+
+                            </p>
+                        </div>
+
+                    </a>
+                    
+                </li>
+                <li class="nav-item sd ">
+                    <a th:href="@{/reels/index}" class="nav-link " id="a-4">
+                        <div class="nav-item-color " id="div-4">
+                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
+                            <i class="fas fa-umbrella "></i>
+
+                            <p style="margin-left: 8% ">
+                                Reels
+
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+                <li class="nav-item sd ">
+                    <a th:href="@{/timekeeping/index}" class="nav-link " id="a-5">
+                        <div class="nav-item-color " id="div-5">
+                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
+                            <i class="fas fa-flag "></i>
+
+                            <p style="margin-left: 8% ">
+                                Report
+
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+                <li class="nav-item sd ">
+                    <a th:href="@{/api/salary/index}" class="nav-link " id="a-6">
+                        <div class="nav-item-color " id="div-6">
+                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
+                            <i class="fas fa-edit "></i>
+
+                            <p style="margin-left: 8% ">
+                                Notification
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item sd ">
+                    <a th:href="@{/notification}" class="nav-link " id="a-7">
+                        <div class="nav-item-color " id="div-7">
+                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
+                            <i class="fas fa-wrench "></i>
+
+                            <p style="margin-left: 8% ">
+                                Setting
+
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+                <li class="nav-item sd " style="margin-top:10% ">
+                    <a href="/redirectlogout" class="nav-link ">
+                        <div class="nav-itemcolor ">
+                            <!-- <i class="nav-icon fas fa-tachometer-alt "></i> -->
+                            <i class="fas fa-sign-out-alt "></i>
+
+                            <p style="margin-left: 8% ">
+                                Đăng xuất
+
+                            </p>
+                        </div>
+
+                    </a>
+
+                </li>
+                <textarea id="sidebar" th:text="${sidebar}" hidden></textarea>
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+
+
+
+    <script>
+        addchoose();
+
+        function addchoose() {
+            number=1;
+            number = parseInt(document.getElementById("sidebar").innerText);
+
+            // console.log(number);
+
+            document.getElementById("a-"+number).className += "active-link ";
+            document.getElementById("div-"+number).className = "nav-item-color-active";
+
+        }
+
+    </script>
+
+</aside>
+
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+  #login-card {
+            margin-top: 5%;
+            background-color: #94D8EB;
+            border-radius: 10px;
+        }
+        
+        #login-title-name {
+            font-size: 15pt;
+            text-align: center;
+            color: #94D8EB;
+        }
+        
+        #login-text-description {
+            font-size: 20pt;
+            color: #050000;
+            font-family: inherit;
+            font-style: italic
+        }
+        
+        .input {
+            height: 3rem;
+            border-radius: 10px;
+            border-color: #6667AB;
+            color: #00E6FE;
+        }
+        
+        #button-login {
+            background-color: #00E6FE;
+            border-color: #007279;
+            border-radius: 10px;
+            font-weight: bolder;
+            letter-spacing: 1.7px
+        }

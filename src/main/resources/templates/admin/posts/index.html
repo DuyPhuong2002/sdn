@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/_layout}">
+
+    <head>
+        <title>AdminLTE 3 | Dashboard</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+
+    <body>
+                <div layout:fragment="content">
+
+            <h3 class="title-page">Account Manager</h3>
+
+
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col background-table">
+
+
+                    <div class="row" style="margin-bottom:2% ;">
+                        <div class="col-sm-1" ></div>
+                        <form class="col-sm-5" th:action="@{account/index}">
+
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <input class="form-control input" placeholder="Nhập email hoặc tên..." type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+                                </div>
+                                <div class="col-sm-3">
+                                    <input class="btn btn-success button-defualt" type="submit" value="Search" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <input class="btn btn-success button-defualt" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+                                </div>
+
+                            </div>
+
+                             </form>
+                        <div class="col-sm-6" >
+                            <div class="row">
+                                <div class="col-sm-5"></div>
+                                <div class="col-sm-5" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <table class="table"  style="table-layout:fixed;" >
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col">User Name</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Image</th>
+                                <th scope="col"></th>
+                                <th scope="col">Content</th>
+                                <th scope="col">Interactive</th>    
+                                <th scope="col">Create Date</th>
+                             <th scope="col">Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody th:if="${check == false}">
+                            <tr>
+                                <td colspan="5" style="text-align: center"> No Data </td>
+                            </tr>
+
+                        </tbody>
+
+                        <tbody th:if="${check == true}">
+                            <tr th:each="item,stt:${list}">
+
+                                                    <th scope="row" th:text="${stt.Count}"></th>
+                                <td th:text="${item.getIdAccount().getUsername()}" th:id="${item.getIdAccount()}" ></td>
+                                <td th:text="${item.getTitle()}" ></td>
+                                
+                                <td>
+                                    <img th:src="${'/images/posts/'+item.getImage()}" style="height: 200px;width: 180px;">    
+                                </td>
+                                <td style="word-wrap:break-word">   
+                                </td>
+                                <td style="word-wrap:break-word">   
+                                    <p th:text="${item.getContent()}"></p>
+                                </td>
+                                <td th:text="${item.getPostCommentList().size()+' comment and ' +item.getPostLikeList().size()+' like '}"></td>
+<!--                                <td th:src="images/user-photos/+${item.getPhone()}" ></td>-->
+<!--                                <td th:text="${item.getCreateDate()}" ></td>-->
+                                <td th:text="${item.getCreateDate()}"></td>
+                                <td align="center">
+
+                                    <div class="dropdown">
+                                        <button class="button-envent
+                                                dropdown-toggle" style="margin-right:
+                                                10px;" type="button" id="dropdownMenuButton"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-edit"
+                                               style="color:
+                                               #6667AB"></i>
+                                        </button>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item">Delete</a>
+
+                                            <a class="dropdown-item" >Report</a>
+                                            <a class="dropdown-item" >More</a>
+                                            
+                                        </div>
+
+                                    </div>
+
+                                </td>
+<!--                        <td th:style="${item.getStatus()} == 0 ? 'color:green' : 'color:red' " th:text="${item.getStatus()} == 0?'Active':'Locked'"></td>-->    
+                        
+                            </tr>
+
+                        </tbody>
+
+
+
+                        </tbody>
+                    </table>
+
+                    <button data-toggle="modal"
+                            data-target="#infomationform"  hidden id="openfform">nnn</button>
+                    <form action="/timeline/editname" method="post" >
+                        <div class="modal fade" id="infomationform" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+
+
+                                        <h5 class="modal-title modal-title " id="exampleModalLabel">Thông tin lịch làm việc</h5>
+
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="row" style="margin-top: 1%;">
+                                                    <div class="col-sm-1"></div>
+                                                    <div class="col">
+                                                        <input type="Text" required class="form-control input" id="id"
+                                                               name="id" hidden >
+                                                        <input type="Text" required class="form-control input" id="TimelineName"
+                                                               name="TimelineName" placeholder="Nhập tên lịch làm việc" >
+                                                    </div>
+                                                    <div class="col-sm-1"></div>
+                                                </div>
+
+                                                <input type="submit" hidden id="sumbitdata">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng bảng</button>
+                                        <input type="submit" data-dismiss="modal" class="btn btn-primary" style="background-color:#6667AB ;"
+                                               value="Lưu dữ liệu" onclick="submitdatafunc()">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-1"></div>
+
+            </div>
+
+            <script>
+                function  openformEdit(id) {
+
+
+
+                    name = document.getElementById("TimelineNames" + id).innerText;
+
+                    document.getElementById("id").value = id;
+
+                    document.getElementById("TimelineName").value = name;
+                    document.getElementById("openfform").click();
+                }
+
+                function submitdatafunc() {
+                    document.getElementById("sumbitdata").click();
+
+                }
+            </script>
+
+            <script type="text/javascript">
+                function clearSearch() {
+                    window.location = "[[@{/account/index}]]";
+                }
+            </script>
+
+        </div>
+
+    </body>
+
+</html>

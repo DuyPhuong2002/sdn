@@ -1,0 +1,265 @@
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/_layout}">
+
+    <head>
+        <title>Account Manager</title>
+
+        <style>
+
+            .title-card {
+                padding-top: 11%;
+                padding-bottom: 11%;
+                margin-left: 4%;
+                font-weight: bold
+            }
+
+            .title-page {
+                text-align: center;
+                margin-top: 2%;
+                margin-bottom: 3%;
+                font-weight: bold
+            }
+
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div layout:fragment="content">
+
+            <h3 class="title-page">Account Manager</h3>
+
+
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col background-table">
+
+
+                    <div class="row" style="margin-bottom:2% ;">
+                        <div class="col-sm-1" ></div>
+                        <form class="col-sm-5" th:action="@{/account/index}">
+
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <input class="form-control input" placeholder="Nhập email hoặc tên..." type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+                                </div>
+                                <div class="col-sm-3">
+                                    <input class="btn btn-success button-defualt" type="submit" value="Search" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <input class="btn btn-success button-defualt" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+                                </div>
+
+                            </div>
+
+                             </form>
+                        <div class="col-sm-6" >
+                            <div class="row">
+                                <div class="col-sm-5"></div>
+                                <div class="col-sm-5" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">User Name<span><a th:href="@{/account/search?colum=username}">&nbsp;<i class="fas fa-sort"></i></a></span></th>
+                                <th scope="col">QR</th>
+                                <th scope="col">Full Name<span><a th:href="@{/account/search?colum=fulllName}">&nbsp;<i class="fas fa-sort"></i></a></span></th>
+                                <th scope="col" >   
+                                    <div class="dropdown">
+                                        <button class="button-envent
+                                                10px;" type="button" id="dropdownMenuButton"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-filter"
+                                               style="color:
+                                               #6667AB"></i>
+                                        </button>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                             <a class="dropdown-item" th:href="@{/account/search?colum=Male}"><strong <i class="fas fa-mars" style="color:#006AE1"></i>&nbsp;Male</strong>
+                                        </strong></a>
+
+                                            <a class="dropdown-item" th:href="@{/account/search?colum=Female}"><strong <i class="fas fa-venus" style="color:#FE0193"></i>&nbsp;Female</strong></a>
+                                            
+                                     
+                                        </div>
+
+                                    </div>
+                                
+                                </th>
+                                <th scope="col">Email<span><a th:href="@{/account/search?colum=email}">&nbsp;<i class="fas fa-sort"></i></a></span></th>
+                                <th scope="col">Phone<span><a th:href="@{/account/search?colum=phone}">&nbsp;<i class="fas fa-sort"></i></a></span></th>
+                                <th scope="col">Action</th>
+                                <th scope="col" ><div class="dropdown">
+                                        <button class="button-envent
+                                                10px;" type="button" id="dropdownMenuButton"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-list"
+                                               style="color:
+                                               #6667AB"></i>
+                                        </button>
+
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                             <a class="dropdown-item" th:href="@{/account/search?colum=Lock}"><strong <i class="fas fa-lock" style="color:#FE0101"></i>&nbsp;Lock</strong>
+                                        </strong></a>
+
+                                            <a class="dropdown-item" th:href="@{/account/search?colum=Active}"><strong <i class="fas fa-lock-open" style="color:#01BDFE"></i>&nbsp;Active</strong></a>
+                                            
+                                     
+                                        </div>
+
+
+                                    </div></th>
+
+                            </tr>
+                        </thead>
+                        <tbody th:if="${check == false}">
+                            <tr>
+                                <td colspan="5" style="text-align: center"> No Data </td>
+                            </tr>
+
+                        </tbody>
+
+                        <tbody th:if="${check == true}">
+                            <tr th:each="item,stt:${list}">
+
+                                <!--                    <th scope="row" th:text="${stt.Count}"></th>-->
+                                <td th:text="${item.getUsername()}" th:id="${item.getUsername()}" ></td>
+                                <td></td>
+                                <td th:text="${item.getFulllName()}" ></td>
+                                <td>
+                                    <div th:switch="${item.getGender()}">
+                                        <strong <i th:case="'Male'" class="fas fa-mars" style="color:#006AE1"></i></strong>
+                                        <strong <i th:case="'Female'" class="fas fa-venus" style="color:#FE0193"></i></strong>
+
+                                        <!-- * for default case -->
+                                    </div>
+                                </td>
+                                <td th:text="${item.getEmail()}" ></td>
+                                <td th:text="${item.getPhone()}" ></td>
+                                <td align="center">
+
+                                    <div class="dropdown">
+                                        <button class="button-envent
+                                                dropdown-toggle" style="margin-right:
+                                                10px;" type="button" id="dropdownMenuButton"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-edit"
+                                               style="color:
+                                               #6667AB"></i>
+                                        </button>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" th:href="'/account/recovery/code?username='+${item.getUsername()}">Reset Password</a>
+
+                                            <a class="dropdown-item" th:text="${item.getStatus()==0}?'Lock Account':' Unlock tài khoản'"  th:href="'/account/look?username='+${item.getUsername()}">  </a>
+                                            
+                                            <a class="dropdown-item" th:href="'/account/details?username='+${item.getUsername()}">More</a>
+                                        </div>
+
+                                    </div>
+
+                                </td>
+                        <td th:style="${item.getStatus()} == 0 ? 'color:green' : 'color:red' " th:text="${item.getStatus()} == 0?'Active':'Locked'"></td>
+                        
+                            </tr>
+
+                        </tbody>
+
+
+
+                        </tbody>
+                    </table>
+
+                    <button data-toggle="modal"
+                            data-target="#infomationform"  hidden id="openfform">nnn</button>
+                    <form action="/timeline/editname" method="post" >
+                        <div class="modal fade" id="infomationform" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+
+
+                                        <h5 class="modal-title modal-title " id="exampleModalLabel">Thông tin lịch làm việc</h5>
+
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="row" style="margin-top: 1%;">
+                                                    <div class="col-sm-1"></div>
+                                                    <div class="col">
+                                                        <input type="Text" required class="form-control input" id="id"
+                                                               name="id" hidden >
+                                                        <input type="Text" required class="form-control input" id="TimelineName"
+                                                               name="TimelineName" placeholder="Nhập tên lịch làm việc" >
+                                                    </div>
+                                                    <div class="col-sm-1"></div>
+                                                </div>
+
+                                                <input type="submit" hidden id="sumbitdata">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng bảng</button>
+                                        <input type="submit" data-dismiss="modal" class="btn btn-primary" style="background-color:#6667AB ;"
+                                               value="Lưu dữ liệu" onclick="submitdatafunc()">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-1"></div>
+
+            </div>
+
+            <script>
+                function  openformEdit(id) {
+
+
+
+                    name = document.getElementById("TimelineNames" + id).innerText;
+
+                    document.getElementById("id").value = id;
+
+                    document.getElementById("TimelineName").value = name;
+                    document.getElementById("openfform").click();
+                }
+
+                function submitdatafunc() {
+                    document.getElementById("sumbitdata").click();
+
+                }
+            </script>
+
+            <script type="text/javascript">
+                function clearSearch() {
+                    window.location = "[[@{/account/index}]]";
+                }
+            </script>
+
+        </div>
+
+
+    </body>
+
+</html>

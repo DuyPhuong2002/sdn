@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Login</title>
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ======================================================================================================================================== -->
+
+    <link rel="shortcut icon" type="image/png" th:href="@{images/Website/logozx.png}"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{plugins/fontawesome-free/css/all.min.css}">
+
+    <!-- Tempusdominus Bbootstrap 4 -->
+    <link rel="stylesheet" th:href="@{plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css}">
+    <!-- iCheck -->
+    <link rel="stylesheet" th:href="@{plugins/icheck-bootstrap/icheck-bootstrap.min.css}">
+    <!-- JQVMap -->
+    <link rel="stylesheet" th:href="@{plugins/jqvmap/jqvmap.min.css}">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{dist/css/adminlte.min.css}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" th:href="@{plugins/overlayScrollbars/css/OverlayScrollbars.min.css}">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" th:href="@{plugins/daterangepicker/daterangepicker.css}">
+    <!-- summernote -->
+    <link rel="stylesheet" th:href="@{plugins/summernote/summernote-bs4.css}">
+    <link th:href="@{css/login.css}" rel="stylesheet">
+    <link th:href="@{css/khr.css}" rel="stylesheet">
+    <!-- ======================================================================================================================================== -->
+
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" rel="stylesheet">
+
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed" style="background-color: #D5FAFE ; color: #000000;">
+
+<div class="container">
+
+
+    <div class="row" style="min-height: 700px ;">
+
+        <div class="col-sm-6" id="login-card">
+
+            <div class="row" style="margin-top: 10%; margin-bottom: 4%; margin-left: 4%;">
+
+                <div class="col-sm-3">
+                    <img th:src="@{images/Website/panel.png}" alt="logo" style="max-width:150px ;">
+                </div>
+                <div class="col-sm-4">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col" style="margin-top: 15%;">
+                    <div  style="text-align: center;">
+                        <img th:src="@{images/Website/viewimage.jpg}" style="max-width:250px;" alt="" srcset="">
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col" style="margin-top: 15%;">
+                    <div style="text-align: center;">
+                        <div id="login-text-description">
+                            Social network connects people
+                        </div>
+
+                        <div id="login-text-description">
+                            System manager app
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-sm-1"></div>
+
+        <div class="col-sm-5">
+
+            <div style="margin-top:40% ; margin-left: 20%;">
+
+                <h3>Đăng nhập</h3>
+
+
+            </div>
+            <form class="form-signin" method="post" th:action="@{/j_spring_security_check}">
+                <div class="row" style="margin-top:10% ">
+                    <div class="col-sm-4"></div>
+                    <div class="col">
+
+                        <input type="username" class="form-control input" placeholder="Enter username" id="username"
+                               name="username">
+
+                    </div>
+                    <!-- <div class="col-sm-2"></div> -->
+
+                </div>
+
+                <div class="row" style="margin-top:7% ">
+                    <div class="col-sm-4"></div>
+                    <div class="col">
+
+                        <input type="password" class="form-control input" placeholder="Enter password" id="password"
+                               name="password">
+                    </div>
+                    <!-- <div class="col-sm-2"></div> -->
+                </div>
+                <div class="row" style="margin-top:7% ">
+                    <div class="col-sm-5"></div>
+                    <div class="col">
+                        <div th:if="${param.error}">
+                            Invalid username or password.
+                        </div>
+                        <div th:if="${param.logout}">
+                            You have been logged out.
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row" style="margin-top:7% ">
+                    <div class="col-sm-4"></div>
+                    <div class="col">
+
+                        <div class="pretty p-default p-curve">
+                            <input type="checkbox" class="checkbox" id="">
+
+                            <div class="state">
+                                <label style=" letter-spacing:1.5px">Remember login</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-2"></div> -->
+
+                </div>
+
+                <div class="row" style="margin-top:7% ">
+                    <div class="col-sm-4"></div>
+                    <div class="col">
+
+                        <input type="submit" class="btn btn-success form-control" value="Log in" id="button-login">
+
+                    </div>
+                    <!-- <div class="col-sm-2"></div> -->
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer style="text-align: center; font-weight: bolder; margin-top: 1%;">
+        Power by
+        <a href="http://">&COPY; SDN Promation</a>
+        <br>
+         &REG; FPT Aptech
+            
+    </footer>
+
+    <!-- /.control-sidebar -->
+</div>
+
+
+<!-- ======================================================================================================================================== -->
+
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script th:src="@{plugins/jquery/jquery.min.js} "></script>
+<!-- jQuery UI 1.11.4 -->
+<script th:src="@{plugins/jquery-ui/jquery-ui.min.js }"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<!--                                                                            <script>
+                                                                                $.widget.bridge('uibutton', $.ui.button)
+                                                                            </script>-->
+<!-- Bootstrap 4 -->
+<script th:src="@{plugins/bootstrap/js/bootstrap.bundle.min.js  }"></script>
+<!-- ChartJS -->
+<script th:src="@{plugins/chart.js/Chart.min.js}"></script>
+<!-- Sparkline -->
+<script src="@{plugins/sparklines/sparkline.js}"></script>
+<!-- JQVMap -->
+<script th:src="@{plugins/jqvmap/jquery.vmap.min.js}"></script>
+<script th:src="@{plugins/jqvmap/maps/jquery.vmap.usa.js}"></script>
+<!-- jQuery Knob Chart -->
+<script th:src="@{plugins/jquery-knob/jquery.knob.min.js}"></script>
+<!-- daterangepicker -->
+<script th:src="@{plugins/moment/moment.min.js}"></script>
+<script th:src="@{plugins/daterangepicker/daterangepicker.js}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script th:src="@{plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js}"></script>
+<!-- Summernote -->
+<script th:src="@{plugins/summernote/summernote-bs4.min.js}"></script>
+<!-- overlayScrollbars -->
+<script th:src="@{plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{dist/js/adminlte.js} "></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script th:src="@{dist/js/pages/dashboard.js} "></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{dist/js/demo.js}"></script>
+<!-- ======================================================================================================================================== -->
+
+</body>
+
+</html>
